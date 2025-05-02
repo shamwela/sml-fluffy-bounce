@@ -1,7 +1,14 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import FluffyHug1 from '../public/fluffy-hug-1.png'
-import Two from '../public/2.avif'
+import Image1 from '../public/fluffy-hug-1.png'
+import Image2 from '../public/2.avif'
+import Image3 from '../public/3.avif'
+import Image4 from '../public/4.avif'
+import Image5 from '../public/5.avif'
+import { Header } from '@/common/Header'
+import { Footer } from '@/common/Footer'
+
+const imageSize = 150
 
 export default function HomePage() {
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -13,6 +20,36 @@ export default function HomePage() {
 
   // Determine if we should apply the bounce animation
   const isScrolling = scrollPosition > 5 // Small threshold to detect scrolling
+
+  // Calculate the position for the Two image
+  // We'll move it from center to bottom right and then off screen
+  const moveThreshold = 3000 // How much scroll before image is completely off screen
+
+  // Calculate X position (from center to right and beyond)
+  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 0
+  const xPosition = Math.min(screenWidth + 200, scrollPosition * 1.5)
+
+  // Calculate Y position (from center to bottom and beyond)
+  const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 0
+  const yPosition = Math.min(screenHeight + 200, scrollPosition * 1.5)
+
+  const backgroundImageStyle = {
+    width: imageSize,
+    height: imageSize,
+    position: 'fixed',
+    zIndex: 20,
+    transform: `translate(${xPosition}px, ${yPosition}px)`,
+    transition: 'transform 0.5s ease-out',
+    // top: '50%',
+    // left: '30%',
+    marginLeft: '-50px',
+    marginTop: '-50px',
+    // Hide when fully off screen
+    opacity: scrollPosition > moveThreshold ? 0 : 1,
+    visibility: scrollPosition > moveThreshold ? 'hidden' : 'visible',
+    transitionProperty: 'transform, opacity',
+    transitionDuration: '0.5s, 0.3s',
+  } as const
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,28 +65,76 @@ export default function HomePage() {
 
   return (
     <div className='h-[10000px]'>
+      <Header />
       {/* Fixed content in the center of the screen */}
       <div className='fixed inset-0 flex items-center justify-center pointer-events-none z-10'>
         <Image
-          src={FluffyHug1}
-          alt='Fluffy Hug 1'
+          src={Image1}
+          alt='Image 1'
           className={`${
             isScrolling ? '' : 'fluffy-bounce'
           } pointer-events-auto`}
           style={{
-            width: 100,
-            height: 100,
+            width: imageSize,
+            height: imageSize,
             transform: `rotate(-${rotation}deg) scale(${scale})`,
             transition: 'transform 0.3s ease-out',
           }}
         />
       </div>
-      <Image
-        src={Two}
-        alt='Two'
-        className='fluffy-bounce'
-        style={{ width: 100, height: 100 }}
-      />
+      <div
+        style={{
+          ...backgroundImageStyle,
+          top: '70%',
+          left: '40%',
+        }}
+      >
+        <Image
+          src={Image2}
+          alt='Image 2'
+          className={!isScrolling ? 'fluffy-bounce' : ''}
+        />
+      </div>
+      <div
+        style={{
+          ...backgroundImageStyle,
+          top: '30%',
+          left: '20%',
+        }}
+      >
+        <Image
+          src={Image3}
+          alt='Image 3'
+          className={!isScrolling ? 'fluffy-bounce' : ''}
+        />
+      </div>
+      <div
+        style={{
+          ...backgroundImageStyle,
+          top: '25%',
+          right: '20%',
+        }}
+      >
+        <Image
+          src={Image4}
+          alt='Image 4'
+          className={!isScrolling ? 'fluffy-bounce' : ''}
+        />
+      </div>
+      <div
+        style={{
+          ...backgroundImageStyle,
+          bottom: '30%',
+          right: '10%',
+        }}
+      >
+        <Image
+          src={Image5}
+          alt='Image 5'
+          className={!isScrolling ? 'fluffy-bounce' : ''}
+        />
+      </div>
+      <Footer />
     </div>
   )
 }
