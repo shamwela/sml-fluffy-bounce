@@ -9,7 +9,7 @@ export default function HomePage() {
 
   // Calculate rotation and scale based on scroll position
   const rotation = Math.min(90, (scrollPosition / maxScroll) * 90)
-  const scale = 1 + Math.min(2, (scrollPosition / maxScroll) * 2)
+  const scale = 1 + Math.min(0.5, (scrollPosition / maxScroll) * 0.5)
 
   // Determine if we should apply the bounce animation
   const isScrolling = scrollPosition > 5 // Small threshold to detect scrolling
@@ -37,12 +37,19 @@ export default function HomePage() {
             isScrolling ? '' : 'fluffy-bounce'
           } pointer-events-auto`}
           style={{
+            width: 100,
+            height: 100,
             transform: `rotate(-${rotation}deg) scale(${scale})`,
             transition: 'transform 0.3s ease-out',
           }}
         />
       </div>
-      <Image src={Two} alt='Two' className='fluffy-bounce' />
+      <Image
+        src={Two}
+        alt='Two'
+        className='fluffy-bounce'
+        style={{ width: 100, height: 100 }}
+      />
     </div>
   )
 }

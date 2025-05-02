@@ -15,8 +15,5 @@
 }
 
 .fluffy-bounce {
-  width: 200px;
-  height: 200px;
-  border-radius: 16px;
   animation: fluffy-bounce-animation 1s ease-in-out infinite;
 }
