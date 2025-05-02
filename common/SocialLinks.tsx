@@ -1,6 +1,6 @@
-import DiscordLogo from '@/public/discord.svg'
-import OpenSeaLogo from '@/public/opensea.svg'
-import TwitterLogo from '@/public/twitter.svg'
+import DiscordLogo from '@/public/social-icons/discord.svg'
+import OpenSeaLogo from '@/public/social-icons/opensea.svg'
+import TwitterLogo from '@/public/social-icons/twitter.svg'
 import Image from 'next/image'
 
 export const SocialLinks = () => {

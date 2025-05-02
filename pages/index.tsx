@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import Image1 from '../public/fluffy-hug-1.png'
-import Image2 from '../public/2.avif'
-import Image3 from '../public/3.avif'
-import Image4 from '../public/4.avif'
-import Image5 from '../public/5.avif'
+import Image1 from '@/public/nfts/1.png'
+import Image2 from '@/public/nfts/2.avif'
+import Image3 from '@/public/nfts/3.avif'
+import Image4 from '@/public/nfts/4.avif'
+import Image5 from '@/public/nfts/5.avif'
 import { Header } from '@/common/Header'
 import { Footer } from '@/common/Footer'
+import Head from 'next/head'
 
 const imageSize = 150
 
@@ -22,7 +23,7 @@ export default function HomePage() {
   const isScrolling = scrollPosition > 5 // Small threshold to detect scrolling
 
   // Calculate the position for the Two image
-  // We'll move it from center to bottom right and then off screen
+  // Move it from center to bottom right and then off screen
   const moveThreshold = 3000 // How much scroll before image is completely off screen
 
   // Calculate X position (from center to right and beyond)
@@ -40,8 +41,6 @@ export default function HomePage() {
     zIndex: 20,
     transform: `translate(${xPosition}px, ${yPosition}px)`,
     transition: 'transform 0.5s ease-out',
-    // top: '50%',
-    // left: '30%',
     marginLeft: '-50px',
     marginTop: '-50px',
     // Hide when fully off screen
@@ -64,7 +63,11 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className='h-[10000px]'>
+    <div className='h-[10000px]' style={{ backgroundColor: '#FCF3E2' }}>
+      <Head>
+        <title>Fluffy HUGS NFT</title>
+        <meta name='description' content='Fluffy HUGS NFT' />
+      </Head>
       <Header />
       {/* Fixed content in the center of the screen */}
       <div className='fixed inset-0 flex items-center justify-center pointer-events-none z-10'>
@@ -93,6 +96,7 @@ export default function HomePage() {
           src={Image2}
           alt='Image 2'
           className={!isScrolling ? 'fluffy-bounce' : ''}
+          style={{ animationDelay: '0.05s' }}
         />
       </div>
       <div
@@ -106,6 +110,7 @@ export default function HomePage() {
           src={Image3}
           alt='Image 3'
           className={!isScrolling ? 'fluffy-bounce' : ''}
+          style={{ animationDelay: '0.1s' }}
         />
       </div>
       <div
@@ -119,6 +124,7 @@ export default function HomePage() {
           src={Image4}
           alt='Image 4'
           className={!isScrolling ? 'fluffy-bounce' : ''}
+          style={{ animationDelay: '0.15s' }}
         />
       </div>
       <div
@@ -132,6 +138,7 @@ export default function HomePage() {
           src={Image5}
           alt='Image 5'
           className={!isScrolling ? 'fluffy-bounce' : ''}
+          style={{ animationDelay: '0.2s' }}
         />
       </div>
       <Footer />
