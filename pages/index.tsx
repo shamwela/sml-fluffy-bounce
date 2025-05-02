@@ -17,7 +17,8 @@ export default function HomePage() {
 
   // Calculate rotation and scale based on scroll position
   const rotation = Math.min(90, (scrollPosition / maxScroll) * 90)
-  const scale = 1 + Math.min(0.5, (scrollPosition / maxScroll) * 0.5)
+  // When scrolled, the middle image will be 2x bigger.
+  const scale = 1 + Math.min(1, (scrollPosition / maxScroll) * 1)
 
   // Determine if we should apply the bounce animation
   const isScrolling = scrollPosition > 5 // Small threshold to detect scrolling
@@ -69,7 +70,6 @@ export default function HomePage() {
         <meta name='description' content='Fluffy HUGS NFT' />
       </Head>
       <Header />
-      {/* Fixed content in the center of the screen */}
       <div className='fixed inset-0 flex items-center justify-center pointer-events-none z-10'>
         <Image
           src={Image1}
